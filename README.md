@@ -52,14 +52,19 @@ For example if the workspace you wish to monitor is named 'Test1' you will enter
 
 For another example if the workspaces you wish to monitor are named 'Test1' and 'Test2' you will enter "name eq 'Test1' or name eq 'Test2'".
 
-5. Select the "Load" button and the template will load.  
+5. Select the "Load" button.  If this is your first time using the custom data connectors you will be prompted to sign into Office 365. Please follow the instructions to sign in and then choose the "Connect" button.
+
+![Sign-In](./documentation/images/sign-in.png)
+*Figure 2 - Sign In Prompt*
+
+6.  and the template will load.  
 
 ![Refresh in Progress](./documentation/images/Refresh%20in%20Progress.png)
-*Figure 2 - Example of Refresh In Progress*
+*Figure 3 - Example of Refresh In Progress*
 6. When completed you should see the Home tab of the monitoring report.
 
 ![Example of Home tab](./documentation/images/Example%20Report.png)
-*Figure 3 - Example of Power BI Monitoring Report*
+*Figure 4 - Example of Power BI Monitoring Report*
 
 7. Please save this file.  If you do not have a gateway installed, you will need to refresh this file locally to pull the latest information.   
 
@@ -75,7 +80,7 @@ Since the connector uses the OAuth of the logged in accountto get the Power Auto
 3. Filter the "Name" and specify with flows you wish to monitor.
 
 ![Power Automate](./documentation/images/Power%20Automate.png)
-*Figure 4 - Screenshot of where to filter the Power Automate flows that you wish to monitor.*
+*Figure 5 - Screenshot of where to filter the Power Automate flows that you wish to monitor.*
 
 ## Exceptions with unscheduled Power BI Datasets
 If there are datasets that do not require an automated refresh scheduled with the Power BI Dataset settings, you can add those datasets to an exception list.  Within the template, please follow these steps:
@@ -87,9 +92,9 @@ If there are datasets that do not require an automated refresh scheduled with th
 3. Within the "Query Settings" pane, click the cog icon next to the "Source" step.  
 
 ![Refresh Exception List](./documentation/images/Refresh%20Exception%20List.png)
-*Figure 5 - Screenshot of where to add/update datasets on the refresh exception list.*
+*Figure 6 - Screenshot of where to add/update datasets on the refresh exception list.*
 
 4. Add/Update the names of the datasets you wish to have an exception. When complete, click the "OK" button. Please note the name of the dataset must match **exactly** the name in the Power BI service.
 
 ![Create Table](./documentation/images/Create%20Table.png)
-*Figure 6 - Example of editing refresh exception list*
+*Figure 7 - Example of editing refresh exception list*
