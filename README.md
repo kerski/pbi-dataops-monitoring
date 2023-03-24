@@ -35,7 +35,7 @@ The custom data connectors will need to be installed in the a Power BI Gateway i
 
 ## Installation
 
-1. Download the appropriate .pbit file from the latest Release section.  
+1. Download the appropriate .pbit file from the <a href="https://github.com/kerski/pbi-dataops-monitoring/releases" target="_blank">latest Release section</a>.  
 
 2. Open the .pbit template.
 
