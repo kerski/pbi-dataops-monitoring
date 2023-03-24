@@ -21,14 +21,16 @@ To help automate checks of the issues, the templates use two open-source custome
 ### Commercial Tenant
 Please follow the instructions for the following connectors:
 
--<a href="https://github.com/kerski/powerquery-connector-pbi-rest-api-commercial#installation" target="_blank">Power Query Custom Data Connector for Power BI REST APIs</a><br/>
--<a href="https://github.com/kerski/powerquery-connector-power-automate-rest-api-commercial#installation" target="_blank">Power Query Custom Data Connector for Power Automate REST APIs</a>
+<a href="https://github.com/kerski/powerquery-connector-pbi-rest-api-commercial#installation" target="_blank">Power Query Custom Data Connector for Power BI REST APIs</a>
+
+<a href="https://github.com/kerski/powerquery-connector-power-automate-rest-api-commercial#installation" target="_blank">Power Query Custom Data Connector for Power Automate REST APIs</a>
 
 ### Government Community Cloud (GCC) Tenant
 Please follow the instructions for the following connectors:
 
--<a href="https://github.com/kerski/powerquery-connector-pbi-rest-api-gcc#installation" target="_blank">Power Query Custom Data Connector for Power BI REST APIs</a><br/>
--<a href="https://github.com/kerski/powerquery-connector-power-automate-rest-api-gcc#installation" target="_blank">Power Query Custom Data Connector for Power Automate REST APIs</a>
+<a href="https://github.com/kerski/powerquery-connector-pbi-rest-api-gcc#installation" target="_blank">Power Query Custom Data Connector for Power BI REST APIs</a>
+
+<a href="https://github.com/kerski/powerquery-connector-power-automate-rest-api-gcc#installation" target="_blank">Power Query Custom Data Connector for Power Automate REST APIs</a>
 
 #### On-Premises Gateway
 The custom data connectors will need to be installed in the a Power BI Gateway in order to refresh the monitoring template in the Power BI Service. For more information on installing a custom data connector with a gateway please see: https://learn.microsoft.com/en-us/power-bi/connect-data/service-gateway-custom-connectors.
