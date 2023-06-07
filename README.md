@@ -7,12 +7,17 @@ Embracing the DataOps principle "Monitor Quality and Performance", this reposito
 
 The Power BI templates in this repository help you monitor for issues such as:
 
+### Power BI Issues
 1. Unresolved Failed Dataset Refreshes -  If the latest dataset refresh has failed this template identifies the issue.
 2. Unscheduled Dataset Refresh - If a dataset fails multiple times then the schedule refresh is disabled.  This can lead to latent data and this template highlights this issue.
 3. Long-running dataset refreshs - If a dataset is taking longer than two hours to run this is generally a concern and should be investigated.
 4. Unresolved Failed Dataflows Refreshes - If the latest dataflow has failed this template identifies the issue.
-5. Unresolved Failure with Scheduled Power Automate Flows - If the latest schedule flow in Power Automate fails this template identifies the issue.
-6. Failed Manually Triggered Power Automate Flows in past 72 hours - If manually triggered flows (often through Power Automate visuals) fail this template highlights this issue. 
+5. Number of Data Quality Issue Tables within Dataset - If the dataset has hidden tables that start with "Errors in", this template identifies the issue.  This indicates existing or prior cell-level errors that need to be resolved (and tables deleted).
+
+### Power Automate Issues
+1. Unresolved Failure with Scheduled Power Automate Flows - If the latest schedule flow in Power Automate fails this template identifies the issue.
+2. Failed Manually Triggered Power Automate Flows in past 72 hours - If manually triggered flows (often through Power Automate visuals) fail this template highlights this issue.
+ 
 
 ## Prerequisites 
 
