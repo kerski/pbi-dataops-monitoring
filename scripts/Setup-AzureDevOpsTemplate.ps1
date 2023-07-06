@@ -24,10 +24,10 @@ $ProjectName = $null
 $ADOSiteURL = $null
 $DF_URL = ""
 $DFOutput = ".\Azure DevOps Pipeline Monitoring.json"
-$DFUtilsURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/Scripts/DFUtils.psm1"
-$GraphURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/Scripts/Graph.psm1"
-$ImportURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/Scripts/ImportModel.ps1"
-$TemplateURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/SharePoint%20-%20Version%20History%20Template%20-%20Bronze.json"
+$DFUtilsURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/scripts/DFUtils.psm1"
+$GraphURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/scripts/Graph.psm1"
+$ImportURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/scripts/ImportModel.ps1"
+$TemplateURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/Azure%20DevOps%20Pipeline%20Monitoring%20Template.json"
 $FileLocation = "./Azure DevOps Pipeline Monitoring Template.json"
 ### Install dependencies
 #Install Powershell Module if Needed
@@ -48,8 +48,7 @@ $SiteResults = ($Location -Split '/')
 if ($SiteResults.Count -lt 5)
 {
     Throw "We could not extract the project name from the URL $($Location)."
-}
-else{
+} else {
     $ADOSiteURL = $SiteResults[0..3] -join "/"
     $ProjectName = $SiteResults[4]
 } #end if
