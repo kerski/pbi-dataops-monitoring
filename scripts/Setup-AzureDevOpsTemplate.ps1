@@ -23,11 +23,11 @@ $ProjectNameKeyword = "\|PROJECT_NAME\|"
 $ProjectName = $null
 $ADOSiteURL = $null
 $DF_URL = ""
-$DFOutput = ".\Version History - Bronze.json"
-$DFUtilsURI = "https://raw.githubusercontent.com/kerski/power-query-sharepoint-version-history/$($Branch)/Scripts/DFUtils.psm1"
-$GraphURI = "https://raw.githubusercontent.com/kerski/power-query-sharepoint-version-history/$($Branch)/Scripts/Graph.psm1"
-$ImportURI = "https://raw.githubusercontent.com/kerski/power-query-sharepoint-version-history/$($Branch)/Scripts/ImportModel.ps1"
-$TemplateURI = "https://raw.githubusercontent.com/kerski/power-query-sharepoint-version-history/$($Branch)/SharePoint%20-%20Version%20History%20Template%20-%20Bronze.json"
+$DFOutput = ".\Azure DevOps Pipeline Monitoring.json"
+$DFUtilsURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/Scripts/DFUtils.psm1"
+$GraphURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/Scripts/Graph.psm1"
+$ImportURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/Scripts/ImportModel.ps1"
+$TemplateURI = "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/$($Branch)/SharePoint%20-%20Version%20History%20Template%20-%20Bronze.json"
 $FileLocation = "./Azure DevOps Pipeline Monitoring Template.json"
 ### Install dependencies
 #Install Powershell Module if Needed
