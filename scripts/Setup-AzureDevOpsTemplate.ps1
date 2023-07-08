@@ -91,7 +91,15 @@ if(!$WS){
 
 ### Now Setup Azure DevOps
 Write-Host -ForegroundColor Cyan "Generating PAT Token scoped to Builds and Releases"
-#Get the Azure Ad AccessToken
+
+<# Thanks to @autosysops for this article 
+   which helped me generate PAT tokens
+   more consistently.
+
+   https://autosysops.com/blog/automatic-pat-renewal-for-azure-devops 
+#>
+
+   #Get the Azure Ad AccessToken
 $null = Connect-AzAccount
 $ADToken = Get-AzAccessToken
 
