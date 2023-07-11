@@ -43,12 +43,10 @@ if (Get-Module -ListAvailable -Name "MicrosoftPowerBIMgmt") {
 if (Get-Module -ListAvailable -Name "Az.Accounts") {
     Write-Host "Az.Accounts installed moving forward"
 } else {
+    Write-Host "Installing Azure Powershell Module"
     #Install Az.Accounts
-    Install-Module -Name Az.Accounts -Scope CurrentUser -AllowClobber -Force
+Install-Module -Name Az -Repository PSGallery -Force -Scope CurrentUser -AllowClobber
 }
-# Set Execution Policy so we can handle Az.Accounts loading
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-
 
 ### UPDATE VARIABLES HERE thru Read-Host
 # Set Workspace Name

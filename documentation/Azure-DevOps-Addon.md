@@ -41,33 +41,59 @@ The installation process performs two main tasks:
 
 #### Setting Dataflow Credentials
 
-1.  Navigate to the workspace you indicated in step 3 above.
+1.  Navigate to the workspace you indicated in step 3 above and click on the dataflow name.
 
-2.  Click on the dataflow and choose the "Edit Tables" option.
+![Open Dataflow](./images/open-dataflow.png)
+
+2.  Click on the dataflow and choose the "Edit Tables" 1ption.
+
+![Edit Tables](./images/edit-tables.png)
 
 3. You will see a prompt to "Configure Connection".  Please select.
 
-4. A pop-up will appear, and please choose the Basic authentication option.
+![Configure Connections](./images/configure-connection.png)
+
+4. A pop-up will appear, and please choose the "Edit Connection" option.
+
+![Connect to Datasource](./images/connect-to-datasource.png)
 
 5. Paste the PAT Token you copied into the password field. Do NOT enter anything into the user field.
 
-6. Press Save when finished.
+![Connect to Datasource - Basic](./images/connect-to-datasource-basic.png)
 
-7. If the credentials was created and copied correctly, you can navigate to the tables in the Bronze folder and see the results.
+6. Press Connect when finished.
+
+7. If the credentials were created and copied correctly, you can navigate to the tables in the Bronze folder and see the results.
+
+![Succesful Data Load](./images/success-data-load.png)
+
+8. Press "Save & Close" to save the changes.
+
+![Save and Close Button](./images/save-and-close.png)
+
+9. After saving has completed, you will be prompted to Refresh the dataflow.  Press the "Refresh now" button.
+
+![Refresh Now Button](./images/save-and-refresh.png)
+
+10. Once the refresh has completed you can add the issues stored in this dataflow to your PBI Monitoring report (see next section).
 
 #### Adding Issues to Monitoring
 
 1. Setup the pbi-dataops-monitoring template as described in the [main documentation](../README.md).
 
-1. Open your monitoring Power BI file and within Power Query add the {INSERT NAMES HERE} dataflows.Please refer to [Microsoft's instructions on this process](https://learn.microsoft.com/en-us/power-bi/transform-model/dataflows/dataflows-configure-consume#consume-a-dataflow) if you are unfamilar with this process.
+2. Open your monitoring Power BI file and within Power Query add the tables "Issues - Latest Pipeline Run Failures" and "Issues - Schedule Pipelines That Failed to Run As Scheduled" found in the dataflow. Please refer to [Microsoft's instructions on this process](https://learn.microsoft.com/en-us/power-bi/transform-model/dataflows/dataflows-configure-consume#consume-a-dataflow) if you are unfamilar with this process.
 
-1. Navigate to the "Issues" table and select the cog icon located next to the Source icon.
+3. Navigate to the "Issues" table and select the cog icon located next to the Source icon.
 
-1. Add the {INSERT NAMES HERE} table to the right side of the pop-up. Press save when complete.
+![Update Issues - Select Cog](./images/update-issues.png)
 
-1. Close & Apply your changes.  
+4. Add the "Issues - Latest Pipeline Run Failures" and "Issues - Schedule Pipelines That Failed to Run As Scheduled" tables to the right side of the pop-up. Press the "Ok" button when complete.
 
-1. Publish your latest changes.
+![Append](./images/append.png)
+
+5. Close & Apply your changes.  
+
+6. Publish your latest changes.
 
 ### Earlier verions of Monitoring Template
 1. If you installed a version 1.1 or earlier of the monitoring template, you will also need to copy the "Issues Table" contents from the new template to your existing file.  This table contains the images and ids necessary for these issues to become visible in the Power BI visuals.
