@@ -20,7 +20,7 @@ The installation process performs two main tasks:
 ### Instructions
 
 1. Open PowerShell Version 7 and enter the following script:
-    > Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/scripts/Setup-AzureDevOpsTemplate" -OutFile "./Setup-AzureDevOpsTemplate.ps1"
+    > Invoke-WebRequest -Uri "[https://raw.githubusercontent.com/kerski/pbi-dataops-monitoring/scripts/Setup-AzureDevOpsTemplate](https://github.com/kerski/pbi-dataops-monitoring/blob/development/scripts/Setup-AzureDevOpsTemplate.ps1)" -OutFile "./Setup-AzureDevOpsTemplate.ps1"
     
 1. This will download the setup scripts to the current folder.  Run ".\Setup-AzureDevOpsTemplate.ps1" in PowerShell.
 
