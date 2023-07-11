@@ -46,8 +46,8 @@ if (Get-Module -ListAvailable -Name "Az.Accounts") {
     #Install Az.Accounts
     Install-Module -Name Az.Accounts -Scope CurrentUser -AllowClobber -Force
 }
-# Import Az.Accounts
-Import-Module Az.Accounts
+# Set Execution Policy so we can handle Az.Accounts loading
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 
 ### UPDATE VARIABLES HERE thru Read-Host
