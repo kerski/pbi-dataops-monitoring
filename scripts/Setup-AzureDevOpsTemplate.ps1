@@ -46,6 +46,8 @@ if (Get-Module -ListAvailable -Name "Az.Accounts") {
     #Install Az.Accounts
     Install-Module -Name Az.Accounts -Scope CurrentUser -AllowClobber -Force
 }
+# Import Az.Accounts
+Import-Module Az.Accounts
 
 
 ### UPDATE VARIABLES HERE thru Read-Host

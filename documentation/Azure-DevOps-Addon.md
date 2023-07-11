@@ -29,13 +29,13 @@ The installation process performs two main tasks:
     - The name of the workspaces you wish to upload the dataflow.
     - The URL of the Azure DevOps project.
 
-    ![Prompt for information in install script](./images/enter-information.PNG)
+    ![Prompt for information in install script](./images/enter-information.png)
 
 1. During the course of the install you will be prompted to enter your Microsoft 365 credentials. Depending on your environment you may have a browser tab appear to sign-in. After signing in you can return to the PowerShell window. In addition, if you don't have the Power BI Management Shell or Az.Accounts installed, you will be asked to install.  Please affirm you wish to install those packages if prompted.
 
 1. If the script runs successfully you will be presented with a message similar in the image below.
 
-![Prompt for information in install script](./images/enter-information.PNG)
+![Successful Install Message](./images/success-message.png)
 
 1. <strong><u>Please save the token for use in the steps below.  This will not be accessible once the PowerShell window is closed</u></strong>
 
