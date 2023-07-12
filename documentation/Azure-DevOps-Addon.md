@@ -30,12 +30,14 @@ The installation process performs two main tasks:
     - The URL of the Azure DevOps project.
 
     ![Prompt for information in install script](./images/enter-information.png)
+    *Figure 1 - Prompts for Installation*
 
 1. During the course of the install you will be prompted to enter your Microsoft 365 credentials. Depending on your environment you may have a browser tab appear to sign-in. After signing in you can return to the PowerShell window. In addition, if you don't have the Power BI Management Shell or Az.Accounts installed, you will be asked to install.  Please affirm you wish to install those packages if prompted.
 
 1. If the script runs successfully you will be presented with a message similar in the image below.
 
 ![Successful Install Message](./images/success-message.png)
+*Figure 2 - Example of Successful Install Message*
 
 1. <strong><u>Please save the token for use in the steps below.  This will not be accessible once the PowerShell window is closed.</u></strong>
 
@@ -44,36 +46,44 @@ The installation process performs two main tasks:
 1.  Navigate to the workspace you indicated in step 3 above and click on the dataflow name.
 
 ![Open Dataflow](./images/open-dataflow.png)
+*Figure 3 - Open Dataflow*
 
 2.  Click on the dataflow and choose the "Edit Tables" option.
 
 ![Edit Tables](./images/edit-tables.png)
+*Figure 4 - Edit Tables within Dataflow*
 
 3. You will see a prompt to "Configure Connection".  Please select.
 
 ![Configure Connections](./images/configure-connection.png)
+*Figure 5 - Configure Connection to Azure DevOps*
 
 4. A pop-up will appear, and please choose the "Edit Connection" option.
 
 ![Connect to Datasource](./images/connect-to-datasource.png)
+*Figure 6 - Edit Connection to Data Source*
 
 5. Paste the PAT Token you copied into the password field. Do NOT enter anything into the user field.
 
 ![Connect to Datasource - Basic](./images/connect-to-datasource-basic.png)
+*Figure 7 - Add PAT Token to Password Field*
 
 6. Press Connect when finished.
 
 7. If the credentials were created and copied correctly, you can navigate to the tables in the Bronze folder and see the results.
 
 ![Succesful Data Load](./images/success-data-load.png)
+*Figure 8 - Example of Successful Loading of Tables*
 
 8. Press "Save & Close" to save the changes.
 
 ![Save and Close Button](./images/save-and-close.png)
+*Figure 9 - Save and Close the Changes*
 
 9. After saving has completed, you will be prompted to Refresh the dataflow.  Press the "Refresh now" button.
 
 ![Refresh Now Button](./images/save-and-refresh.png)
+*Figure 10 - Refresh the Dataflow after Saving*
 
 10. Once the refresh has completed you can add the issues stored in this dataflow to your PBI Monitoring report (see next section).
 
@@ -86,10 +96,12 @@ The installation process performs two main tasks:
 3. Navigate to the "Issues" table and select the cog icon located next to the Source icon.
 
 ![Update Issues - Select Cog](./images/update-issues.png)
+*Figure 11 - Update Issues Table's Source Step in Power Query*
 
 4. Add the "Issues - Latest Pipeline Run Failures" and "Issues - Schedule Pipelines That Failed to Run As Scheduled" tables to the right side of the pop-up. Press the "Ok" button when complete.
 
 ![Append](./images/append.png)
+*Figure 12 - Append the two new tables added from the Dataflow*
 
 5. Close & Apply your changes.  
 
