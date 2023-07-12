@@ -6,7 +6,7 @@
 
 ## Prerequisites
 
--  <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2" target="_blank">PowerShell 7</a> installed.  If you are using Windows 10 or 11, this should be installed already. For the purposes of the instructions I'm going to use PowerShell ISE to run a PowerShell script. 
+-  <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2" target="_blank">PowerShell 7</a> installed.  If you are using Windows 10 or 11, this should be installed already.
 
 - Access to a Power BI Workspace
 
@@ -14,8 +14,8 @@
 
 The installation process performs two main tasks:
 
-1) It upload the template dataflow for Azure DevOps Pipeline Monitoring to the workspace you indicate.
-2) It creates a Personal Access Token with build and release read permissions, so that it can be used in settting the credentials for the dataflow. 
+1) It uploads the template dataflow for Azure DevOps Pipeline Monitoring to the workspace you indicate.
+2) It creates a Personal Access Token with build and release read permissions, so that it can be used in setting the credentials for the dataflow. 
 
 ### Instructions
 
@@ -37,7 +37,7 @@ The installation process performs two main tasks:
 
 ![Successful Install Message](./images/success-message.png)
 
-1. <strong><u>Please save the token for use in the steps below.  This will not be accessible once the PowerShell window is closed</u></strong>
+1. <strong><u>Please save the token for use in the steps below.  This will not be accessible once the PowerShell window is closed.</u></strong>
 
 #### Setting Dataflow Credentials
 
@@ -45,7 +45,7 @@ The installation process performs two main tasks:
 
 ![Open Dataflow](./images/open-dataflow.png)
 
-2.  Click on the dataflow and choose the "Edit Tables" 1ption.
+2.  Click on the dataflow and choose the "Edit Tables" option.
 
 ![Edit Tables](./images/edit-tables.png)
 
@@ -81,7 +81,7 @@ The installation process performs two main tasks:
 
 1. Setup the pbi-dataops-monitoring template as described in the [main documentation](../README.md).
 
-2. Open your monitoring Power BI file and within Power Query add the tables "Issues - Latest Pipeline Run Failures" and "Issues - Schedule Pipelines That Failed to Run As Scheduled" found in the dataflow. Please refer to [Microsoft's instructions on this process](https://learn.microsoft.com/en-us/power-bi/transform-model/dataflows/dataflows-configure-consume#consume-a-dataflow) if you are unfamilar with this process.
+2. Open your monitoring Power BI file and within Power Query add the tables "Issues - Latest Pipeline Run Failures" and "Issues - Schedule Pipelines That Failed to Run As Scheduled" found in the dataflow. Please refer to [Microsoft's instructions on this process](https://learn.microsoft.com/en-us/power-bi/transform-model/dataflows/dataflows-configure-consume#consume-a-dataflow) if you are unfamiliar with this process.
 
 3. Navigate to the "Issues" table and select the cog icon located next to the Source icon.
 
@@ -95,5 +95,10 @@ The installation process performs two main tasks:
 
 6. Publish your latest changes.
 
-### Earlier verions of Monitoring Template
+#### Extending the PAT Token
+The current token is scheduled to expire 363 days from when the script was ran.
+
+Please be sure to schedule a reminder for 11 months from now to extend the PAT token.  For more information on doing that, please <a href="https://improveandrepeat.com/2020/11/how-to-extend-a-personal-access-token-for-azure-devops/">read here.</a>
+
+### Earlier Versions of Monitoring Template
 1. If you installed a version 1.1 or earlier of the monitoring template, you will also need to copy the "Issues Table" contents from the new template to your existing file.  This table contains the images and ids necessary for these issues to become visible in the Power BI visuals.
