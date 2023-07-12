@@ -45,8 +45,12 @@ if (Get-Module -ListAvailable -Name "Az.Accounts") {
 } else {
     Write-Host "Installing Azure Powershell Module"
     #Install Az.Accounts
-Install-Module -Name Az -Repository PSGallery -Force -Scope CurrentUser -AllowClobber
+    Install-Module -Name Az -Repository PSGallery -Force -Scope CurrentUser -AllowClobber
 }
+
+#Get the Azure Ad AccessToken
+$null = Connect-AzAccount
+$ADToken = Get-AzAccessToken
 
 ### UPDATE VARIABLES HERE thru Read-Host
 # Set Workspace Name
@@ -98,10 +102,6 @@ Write-Host -ForegroundColor Cyan "Generating PAT Token scoped to Builds and Rele
 
    https://autosysops.com/blog/automatic-pat-renewal-for-azure-devops 
 #>
-
-   #Get the Azure Ad AccessToken
-$null = Connect-AzAccount
-$ADToken = Get-AzAccessToken
 
 #Create the authentication header for the DevOps API
 $Headers = @{
