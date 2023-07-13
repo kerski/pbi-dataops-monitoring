@@ -4,6 +4,17 @@
 
 {INSERT INTRODUCTION}
 
+## Table of Contents
+
+1. [Introduction](#Introduction)
+1. [Prerequisites](#Prerequisites)
+1. [Installation](#Installation)
+    1. [Setting Dataflow Credentials](#Setting-Dataflow-Credentials)
+    1. [Adding Issues to Monitoring](#Adding-Issues-to-Monitoring)
+    1. [Setting Expectations for Scheduled Dataflow](#Setting-Expectations-for-Scheduled-Dataflow)
+    1. [Extending the PAT Token](#Extending-the-PAT-Token)
+    1. [Earlier Versions of Monitoring Template](#Earlier-Versions-of-Monitoring-Template)
+
 ## Prerequisites
 
 -  <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2" target="_blank">PowerShell 7</a> installed.  If you are using Windows 10 or 11, this should be installed already.
@@ -85,7 +96,10 @@ The installation process performs two main tasks:
 ![Refresh Now Button](./images/save-and-refresh.png)
 *Figure 10 - Refresh the Dataflow after Saving*
 
-10. Once the refresh has completed you can add the issues stored in this dataflow to your PBI Monitoring report (see next section).
+10. Remember to schedule the dataflow to refresh. Please refer to [Microsoft's instructions on configuring the dataflow](https://learn.microsoft.com/en-us/power-bi/transform-model/dataflows/dataflows-configure-consume#configure-a-dataflow) if you are unfamiliar with this process.
+
+11. Once the refresh has completed you can add the issues stored in this dataflow to your PBI Monitoring report (see next section).
+
 
 #### Adding Issues to Monitoring
 
@@ -107,10 +121,41 @@ The installation process performs two main tasks:
 
 6. Publish your latest changes.
 
+#### Setting Expectations for Scheduled Dataflows
+
+If you have one or more scheduled Azure Pipelines, you can set the expectations for how often these pipelines should run by taking the following steps:
+
+1. In the dataflow, identify the Pipeline ID for the scheduled pipeline with in the "Pipelines In Project" table. 
+
+![Pipelines In Project](./images/pipeline-manual-id.png)
+*Figure 13 - Pipelines in Project table*
+
+2. Navigate to the "Schedule Pipeline Expectations" table and click on the cog icon on the Source step.
+
+![Schedule Pipeline Expectations](./images/pipeline-manual-id-2.png)
+*Figure 14 - Schedule Pipeline Expectations*
+
+3. The "Create table" window will appear.  Add/Update the Pipeline ID field with the ID you identified in step one and then set the Hour Threshold that will flag the issue.  For example in Figure 15, the Hour Threshold is set to 24.  Therefore, if the Pipeline ID with the internal ID of 1 will be have an issue if it has not run after 24 hours.  
+
+4. Press "OK" 
+
+![Update Schedule Pipeline Expectations](./images/pipeline-manual-id-3.png)
+*Figure 15 - Update the table to set expectations*
+
+5. Press "Save & Close" to save the changes to the dataflow.
+
+![Save and Close Button](./images/save-and-close.png)
+*Figure 16 - Save and Close the Changes*
+
+6. After saving has completed, you will be prompted to Refresh the dataflow.  Press the "Refresh now" button.
+
+![Refresh Now Button](./images/save-and-refresh.png)
+*Figure 17 - Refresh the Dataflow after Saving*
+
 #### Extending the PAT Token
 The current token is scheduled to expire 363 days from when the script was ran.
 
 Please be sure to schedule a reminder for 11 months from now to extend the PAT token.  For more information on doing that, please <a href="https://improveandrepeat.com/2020/11/how-to-extend-a-personal-access-token-for-azure-devops/">read here.</a>
 
-### Earlier Versions of Monitoring Template
+#### Earlier Versions of Monitoring Template
 1. If you installed a version 1.1 or earlier of the monitoring template, you will also need to copy the "Issues Table" contents from the new template to your existing file.  This table contains the images and ids necessary for these issues to become visible in the Power BI visuals.
