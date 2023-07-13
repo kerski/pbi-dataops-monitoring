@@ -39,14 +39,14 @@ The installation process performs two main tasks:
    - The name of the workspaces you wish to upload the dataflow.
    - The URL of the Azure DevOps project.
 
-   <img src="./images/enter-information.png" alt="Prompt for information in install script">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  src="./images/enter-information.png" alt="Prompt for information in install script">
    <em>Figure 1 - Prompts for Installation</em>
 
 1. During the course of the install you will be prompted to enter your Microsoft 365 credentials. Depending on your environment you may have a browser tab appear to sign-in. After signing in you can return to the PowerShell window. In addition, if you don't have the Power BI Management Shell or Az.Accounts installed, you will be asked to install. Please affirm you wish to install those packages if prompted.
 
 1. If the script runs successfully you will be presented with a message similar in the image below.
 
-   <img src="./images/success-message.png" alt="Successful Install Message">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  src="./images/success-message.png" alt="Successful Install Message">
    <em>Figure 2 - Example of Successful Install Message</em>
 
 1. <strong><u>Please save the token for use in the steps below. This will not be accessible once the PowerShell window is closed.</u></strong>
@@ -55,44 +55,44 @@ The installation process performs two main tasks:
 
 1. Navigate to the workspace you indicated in step 3 above and click on the dataflow name.
 
-   <img src="./images/open-dataflow.png" alt="Open Dataflow">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  src="./images/open-dataflow.png" alt="Open Dataflow">
    <em>Figure 3 - Open Dataflow</em>
 
 2. Click on the dataflow and choose the "Edit Tables" option.
 
-   <img src="./images/edit-tables.png" alt="Edit Tables">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  src="./images/edit-tables.png" alt="Edit Tables">
    <em>Figure 4 - Edit Tables within Dataflow</em>
 
 3. You will see a prompt to "Configure Connection". Please select.
 
-   <img src="./images/configure-connection.png" alt="Configure Connections">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;" src="./images/configure-connection.png" alt="Configure Connections">
    <em>Figure 5 - Configure Connection to Azure DevOps</em>
 
 4. A pop-up will appear, and please choose the "Edit Connection" option.
 
-   <img src="./images/connect-to-datasource.png" alt="Connect to Datasource">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;" src="./images/connect-to-datasource.png" alt="Connect to Datasource">
    <em>Figure 6 - Edit Connection to Data Source</em>
 
 5. Paste the PAT Token you copied into the password field. Do NOT enter anything into the user field.
 
-   <img height="200px" width="250px" src="./images/connect-to-datasource-basic.png" alt="Connect to Datasource - Basic"><br/>
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;" src="./images/connect-to-datasource-basic.png" alt="Connect to Datasource - Basic"><br/>
    <em>Figure 7 - Add PAT Token to Password Field</em>
 
 6. Press Connect when finished.
 
 7. If the credentials were created and copied correctly, you can navigate to the tables in the Bronze folder and see the results.
 
-   <img src="./images/success-data-load.png" alt="Succesful Data Load">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  src="./images/success-data-load.png" alt="Succesful Data Load">
    <em>Figure 8 - Example of Successful Loading of Tables</em>
 
 8. Press "Save & Close" to save the changes.
 
-   <img src="./images/save-and-close.png" alt="Save and Close Button">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  src="./images/save-and-close.png" alt="Save and Close Button">
    <em>Figure 9 - Save and Close the Changes</em>
 
 9. After saving has completed, you will be prompted to Refresh the dataflow. Press the "Refresh now" button.
 
-   <img height="100px" width="300px" src="./images/save-and-refresh.png" alt="Refresh Now Button"><br/>
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  height="100px" width="300px" src="./images/save-and-refresh.png" alt="Refresh Now Button"><br/>
    <em>Figure 10 - Refresh the Dataflow after Saving</em>
 
 10. Remember to schedule the dataflow to refresh. Please refer to [Microsoft's instructions on configuring the dataflow](https://learn.microsoft.com/en-us/power-bi/transform-model/dataflows/dataflows-configure-consume#configure-a-dataflow) if you are unfamiliar with this process.
@@ -107,12 +107,12 @@ The installation process performs two main tasks:
 
 3. Navigate to the "Issues" table and select the cog icon located next to the Source icon.
 
-   <img src="./images/update-issues.png" alt="Update Issues - Select Cog">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  src="./images/update-issues.png" alt="Update Issues - Select Cog">
    <em>Figure 11 - Update Issues Table's Source Step in Power Query</em>
 
 4. Add the "Issues - Latest Pipeline Run Failures" and "Issues - Schedule Pipelines That Failed to Run As Scheduled" tables to the right side of the pop-up. Press the "Ok" button when complete.
 
-   <img src="./images/append.png" alt="Append">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  src="./images/append.png" alt="Append">
    <em>Figure 12 - Append the two new tables added from the Dataflow</em>
 
 5. Close & Apply your changes.
@@ -125,29 +125,29 @@ If you have one or more scheduled Azure Pipelines, you can set the expectations 
 
 1. In the dataflow, identify the Pipeline ID for the scheduled pipeline with in the "Pipelines In Project" table.
 
-   <img height="200px" width="300px" src="./images/pipeline-manual-id.png" alt="Pipelines In Project"><br/>
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  height="200px" width="500px" src="./images/pipeline-manual-id.png" alt="Pipelines In Project"><br/>
    <em>Figure 13 - Pipelines in Project table</em>
 
 2. Navigate to the "Schedule Pipeline Expectations" table and click on the cog icon on the Source step.
 
-   <img src="./images/pipeline-manual-id-2.png" alt="Schedule Pipeline Expectations">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  src="./images/pipeline-manual-id-2.png" alt="Schedule Pipeline Expectations">
    <em>Figure 14 - Schedule Pipeline Expectations</em>
 
 3. The "Create table" window will appear. Add/Update the Pipeline ID field with the ID you identified in step one and then set the Hour Threshold that will flag the issue. For example in Figure 15, the Hour Threshold is set to 24. Therefore, if the Pipeline ID with the internal ID of 1 will have an issue if it has not run after 24 hours.
 
 4. Press "OK"
 
-   <img height="300px" width="350px" src="./images/pipeline-manual-id-3.png" alt="Update Schedule Pipeline Expectations"><br/>
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  height="500px" width="450px" src="./images/pipeline-manual-id-3.png" alt="Update Schedule Pipeline Expectations"><br/>
    <em>Figure 15 - Update the table to set expectations</em>
 
 5. Press "Save & Close" to save the changes to the dataflow.
 
-   <img src="./images/save-and-close.png" alt="Save and Close Button">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  src="./images/save-and-close.png" alt="Save and Close Button">
    <em>Figure 16 - Save and Close the Changes</em>
 
 6. After saving has completed, you will be prompted to Refresh the dataflow. Press the "Refresh now" button.
 
-   <img src="./images/save-and-refresh.png" alt="Refresh Now Button">
+   <img style="display: block;margin-left: auto; margin-right: auto;width: 50%;"  src="./images/save-and-refresh.png" alt="Refresh Now Button">
    <em>Figure 17 - Refresh the Dataflow after Saving</em>
 
 #### Extending the PAT Token
