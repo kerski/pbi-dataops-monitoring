@@ -2,7 +2,9 @@
 
 ## Introduction
 
-{INSERT INTRODUCTION}
+As discussed in past blog articles (<a href="https://www.kerski.tech/bringing-dataops-to-power-bi-part22/" target="_blank">Part 22</a> and <a href="https://www.kerski.tech/bringing-dataops-to-power-bi-part25/" target="_blank">Part 25</a>), integrating source code with Azure DevOps yields significant benefits, including the ability to trigger pipelines for evaluating, testing, and deploying code to Power BI workspaces. This integration streamlines development and deployment processes, enhancing collaboration and version control for Power BI projects. 
+
+However, as Git integration moves into general availability and more developers begin using Azure DevOps pipelines, monitoring becomes a greater priority.  The following instructions show how to implement pipeline monitoring with a Power BI dataflow and how to integrate it with the Power BI monitoring template.
 
 ## Table of Contents
 
