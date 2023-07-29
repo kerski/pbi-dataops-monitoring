@@ -1,6 +1,16 @@
 # pbi-dataops-monitoring
 Templates for monitoring Power BI components and related Power Platform elements for your data analytics projects.
 
+## Table of Contents
+
+1. [Introduction](#Introduction)
+1. [Prerequisites](#Prerequisites)
+1. [Installation](#Installation)
+1. [Monitoring Power Automate Flows](#Monitoring-Power-Automate-Flows)
+1. [Exceptions with unscheduled Power BI Datasets](#Exceptions-with-unscheduled-Power-BI-Datasets)
+1. [Azure DevOps Pipeline Monitoring - Add On](./documentation/Azure-DevOps-Addon.md)
+
+
 ## Introduction
 
 Embracing the DataOps principle "Monitor Quality and Performance", this repository provides a set of templates and instructions for monitoring your Power BI solution/projects.  If you're an administrator of a workspace or multiple workspaces you should be monitoring your datasets and/or dataflows.  In addition, you may leverage Power Automate to schedule refreshes, deliver reports, move data between environments, or use the Power Automate visual in Power BI.  All these components are crucial to your solution working and relying on email alone can be problematic due to alert fatigure or incorrect settings for how email notifications are sent.
@@ -17,7 +27,6 @@ The Power BI templates in this repository help you monitor for issues such as:
 ### Power Automate Issues
 1. Unresolved Failure with Scheduled Power Automate Flows - If the latest schedule flow in Power Automate fails this template identifies the issue.
 2. Failed Manually Triggered Power Automate Flows in past 72 hours - If manually triggered flows (often through Power Automate visuals) fail this template highlights this issue.
- 
 
 ## Prerequisites 
 
@@ -73,7 +82,6 @@ For another example if the workspaces you wish to monitor are named 'Test1' and 
 
 7. Please save this file.  If you do not have a gateway installed, you will need to refresh this file locally to pull the latest information.   
 
-## 
 
 ## Monitoring Power Automate Flows
 Since the connector uses the OAuth of the logged in accountto get the Power Automate flows, it's possible that you do not want to monitor all the Power Automate flows that are retrieved by the template.  To specify the Power Automate flows you wish to monitor, within the template follow these steps:

@@ -1,0 +1,186 @@
+{
+    "name": "Azure DevOps Pipeline Monitoring",
+    "description": "Retrieves pipeline information using gateway connection (PAT Token)",
+    "version": "1.0",
+    "culture": "en-US",
+    "modifiedTime": "2023-07-06T03:17:01.3220305+00:00",
+    "ppdf:outputFileFormat": "Csv",
+    "pbi:mashup": {
+        "fastCombine": true,
+        "allowNativeQueries": false,
+        "queriesMetadata": {
+            "PipelineIssueID": {
+                "queryId": "4ce4b6b8-f483-4e82-860f-490c7665fb95",
+                "queryName": "PipelineIssueID",
+                "queryGroupId": "e8de208f-8845-4174-943c-370c447aada6"
+            },
+            "FailedScheduledPipelineIssueID": {
+                "queryId": "6bf6a944-48b0-413c-826c-1788125fc158",
+                "queryName": "FailedScheduledPipelineIssueID",
+                "queryGroupId": "e8de208f-8845-4174-943c-370c447aada6"
+            },
+            "AzureDevOpsBaseURL": {
+                "queryId": "14f426ad-2601-4ad2-91fe-97a686584f71",
+                "queryName": "AzureDevOpsBaseURL",
+                "queryGroupId": "e8de208f-8845-4174-943c-370c447aada6"
+            },
+            "fnGetPipelineRunsInProject": {
+                "queryId": "7fad2703-eb0f-4f69-8ce3-e628435f9ff4",
+                "queryName": "fnGetPipelineRunsInProject",
+                "queryGroupId": "6c766c58-9be2-463d-994d-fd33b346e1f0"
+            },
+            "fnGetPipelinesInProject": {
+                "queryId": "1ebfa457-1c47-4049-8925-2762381845ef",
+                "queryName": "fnGetPipelinesInProject",
+                "queryGroupId": "6c766c58-9be2-463d-994d-fd33b346e1f0"
+            },
+            "Pipelines In Project - Intermediate": {
+                "queryId": "447a9f18-eb6a-40f5-8c17-d92cfa71444a",
+                "queryName": "Pipelines In Project - Intermediate",
+                "queryGroupId": "fd9c64f9-aee1-49de-9d37-1003093ffab8"
+            },
+            "Pipelines In Project": {
+                "queryId": "edb31d5d-b575-4f86-bf4d-be98c7d77e9c",
+                "queryName": "Pipelines In Project",
+                "queryGroupId": "fd9c64f9-aee1-49de-9d37-1003093ffab8"
+            },
+            "Pipeline Runs": {
+                "queryId": "5127967d-b7b0-463d-85b5-9b493de9dad4",
+                "queryName": "Pipeline Runs",
+                "queryGroupId": "fd9c64f9-aee1-49de-9d37-1003093ffab8"
+            },
+            "Latest Pipeline Runs": {
+                "queryId": "6968aebe-205f-407f-8027-d037e252d72c",
+                "queryName": "Latest Pipeline Runs",
+                "queryGroupId": "fd9c64f9-aee1-49de-9d37-1003093ffab8"
+            },
+            "Schedule Pipeline Expectations": {
+                "queryId": "2d52d94a-d8b7-4339-8623-ce5808c0c4ed",
+                "queryName": "Schedule Pipeline Expectations",
+                "queryGroupId": "fe222f52-97ea-4290-8890-cc4ba99ad838"
+            },
+            "Pipeline Runs In Project": {
+                "queryId": "1b2e5041-2ad9-4104-bf0f-df84e9af87da",
+                "queryName": "Pipeline Runs In Project",
+                "queryGroupId": "fe222f52-97ea-4290-8890-cc4ba99ad838"
+            },
+            "Issues - Latest Pipeline Run Failures": {
+                "queryId": "1d754622-aa17-40c4-80e4-e81456d59fcc",
+                "queryName": "Issues - Latest Pipeline Run Failures",
+                "queryGroupId": "fe222f52-97ea-4290-8890-cc4ba99ad838",
+                "loadEnabled": true
+            },
+            "Issues - Schedule Pipelines That Failed to Run As Scheduled": {
+                "queryId": "31d6847d-9098-4256-a72c-960ea798230b",
+                "queryName": "Issues - Schedule Pipelines That Failed to Run As Scheduled",
+                "queryGroupId": "fe222f52-97ea-4290-8890-cc4ba99ad838",
+                "loadEnabled": true
+            }
+        },
+        "document": "section Section1;\r\n[Description = \"Unique Identifier for the Monitoring Issues Table\"]\r\nshared PipelineIssueID = \"9\" meta [IsParameterQuery = true, IsParameterQueryRequired = true, Type = type text];\r\n[Description = \"Unique Identifier for the Monitoring Issues Table\"]\r\nshared FailedScheduledPipelineIssueID = \"10\" meta [IsParameterQuery = true, IsParameterQueryRequired = true, Type = type text];\r\n[Description = \"Domain for Azure DevOps Instance\"]\r\nshared AzureDevOpsBaseURL = \"|DEVOPS_URL|/|PROJECT_NAME|\" meta [IsParameterQuery = true, IsParameterQueryRequired = true, Type = type text];\r\nshared fnGetPipelineRunsInProject = let\n    Source = (PipelineID as number) as text =>\n   let\n   Params =\n        [\n            Headers = [#\"Content-Type\"=\"application/json\"],\n            RelativePath = \"/_apis/pipelines/\" & Number.ToText(PipelineID) & \"/runs?api-version=6.1-preview.1\"\n        ],\n    //Get Pipeline Information\n    WebSource = Web.Contents(AzureDevOpsBaseURL,Params),\n    //Convert to Json\n    Result = Text.FromBinary(WebSource)\nin\nResult,\n  documentation = [\n    Documentation.Name = \"fnGetPipelineRunsInProject\",\n    Documentation.Description = \"Returns json results (text) of pipeline runs based on pipeline's ID.\",\n    Documentation.LongDescription\n      = \"This function calls the Azure DevOps Pipline API (https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/runs/get?view=api-version=6.1-preview.1) based on Pipeline ID. \n         If the pipeline ID exists, json results in text format are returned.\",\n    Documentation.Category = \"Azure DevOps\",\n    Documentation.Source = \"https://github.com/kerski\",\n    Documentation.Version = \"1\",\n    Documentation.Author = \" John Kerski \",\n    Documentation.Examples = {\n      [Description = \"  \", Code = \"fnGetPipelineRunsInProject( \"\"2\"\") \", Result = \" Text of JSON \"]\n    }\n  ],\n  Custom = Value.ReplaceType(Source, Value.ReplaceMetadata(Value.Type(Source), documentation))\nin\n  Custom;\r\nshared fnGetPipelinesInProject = let\n    Source = () as text =>\n   let\n   Params =\n        [\n            Headers = [#\"Content-Type\"=\"application/json\"],\n            RelativePath = \"/_apis/pipelines?api-version=6.1-preview.1\"\n        ],\n    //Get Pipeline Information\n    WebSource = Web.Contents(AzureDevOpsBaseURL,Params),\n    //Convert to Json\n    Result = Text.FromBinary(WebSource)\nin\nResult,\n  documentation = [\n    Documentation.Name = \"fnGetPipelinesInProject\",\n    Documentation.Description = \"Returns json results (text) of pipeline based on AzureDevOpsBaseURL provided.\",\n    Documentation.LongDescription\n      = \"This function calls the Azure DevOps Pipline API (https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/pipelines/list?view=api-version=6.1-preview.1) based on AzureDevOpsBaseURL. If the AzureDevOpsBaseURL (e.g., https:dev.azure.com/{OrgName}/{ProjectName}) is correctly setup, json results in text format are returned.\",\n    Documentation.Category = \"Azure DevOps\",\n    Documentation.Source = \"https://github.com/kerski\",\n    Documentation.Version = \"1\",\n    Documentation.Author = \" John Kerski \",\n    Documentation.Examples = {\n      [Description = \"  \", Code = \"fnGetPipelinesInProject( \"\"https:dev.azure.com/{OrgName}/{ProjectName}\"\") \", Result = \" Text of JSON \"]\n    }\n  ],\n  Custom = Value.ReplaceType(Source, Value.ReplaceMetadata(Value.Type(Source), documentation))\nin\n  Custom;\r\nshared #\"Pipelines In Project - Intermediate\" = let\n    Source = fnGetPipelinesInProject(),\n    #\"Parsed JSON\" = Json.Document(Source),\n    value = #\"Parsed JSON\"[value],\n    #\"Converted to Table\" = Table.FromList(value, Splitter.SplitByNothing(), null, null, ExtraValues.Error),\n    #\"Expanded Column1\" = Table.ExpandRecordColumn(#\"Converted to Table\", \"Column1\", {\"url\", \"id\", \"name\"}, {\"url\", \"id\", \"name\"}),\n    #\"Standardize Column Names\" = Table.RenameColumns(#\"Expanded Column1\" ,{{\"url\", \"URL\"}, {\"id\", \"Pipeline ID\"}, {\"name\", \"Pipeline Name\"}}),\n    #\"Reordered Columns\" = Table.ReorderColumns(#\"Standardize Column Names\",{\"Pipeline ID\", \"URL\", \"Pipeline Name\"}),\n    #\"Changed Type\" = Table.TransformColumnTypes(#\"Reordered Columns\",{{\"Pipeline Name\", type text}, {\"URL\", type text}, {\"Pipeline ID\", Int64.Type}})\nin\n    #\"Changed Type\";\r\n[Description = \"A catalog of Azure DevOps pipelines sourced from /_api/pipelines/{ID} based on the AzureDevOpsProjectName parameter.\"]\r\nshared #\"Pipelines In Project\" = let\n    Source = fnGetPipelinesInProject(),\n    #\"Parsed JSON\" = Json.Document(Source),\n    value = #\"Parsed JSON\"[value],\n    #\"Converted to Table\" = Table.FromList(value, Splitter.SplitByNothing(), null, null, ExtraValues.Error),\n    #\"Expanded Column1\" = Table.ExpandRecordColumn(#\"Converted to Table\", \"Column1\", {\"url\", \"id\", \"name\"}, {\"url\", \"id\", \"name\"}),\n    #\"Standardize Column Names\" = Table.RenameColumns(#\"Expanded Column1\" ,{{\"url\", \"URL\"}, {\"id\", \"Pipeline ID\"}, {\"name\", \"Pipeline Name\"}}),\n    #\"Reordered Columns\" = Table.ReorderColumns(#\"Standardize Column Names\",{\"Pipeline ID\", \"URL\", \"Pipeline Name\"}),\n    #\"Changed Type\" = Table.TransformColumnTypes(#\"Reordered Columns\",{{\"Pipeline Name\", type text}, {\"URL\", type text}, {\"Pipeline ID\", Int64.Type}})\nin\n    #\"Changed Type\";\r\n[Description = \"A history of execution of the Azure DevOps pipelines sourced from /_api/pipelines/{ID}/runs\"]\r\nshared #\"Pipeline Runs\" = let\n    Source = #\"Pipelines In Project - Intermediate\",\n    #\"Removed Other Columns\" = Table.SelectColumns(Source,{\"Pipeline ID\"}),\n    fnGetPipelineRunsInProject = Table.AddColumn(#\"Removed Other Columns\", \"GetPipelinesRunsInProject\", each fnGetPipelineRunsInProject([Pipeline ID])),\n    #\"Parsed JSON\" = Table.TransformColumns(fnGetPipelineRunsInProject,{{\"GetPipelinesRunsInProject\", Json.Document}}),\n    #\"Expanded GetPipelinesRunsInProject\" = Table.ExpandRecordColumn(#\"Parsed JSON\", \"GetPipelinesRunsInProject\", {\"value\"}, {\"value\"}),\n    #\"Expanded value\" = Table.ExpandListColumn(#\"Expanded GetPipelinesRunsInProject\", \"value\"),\n    #\"Expanded value1\" = Table.ExpandRecordColumn(#\"Expanded value\", \"value\", {\"state\", \"result\", \"createdDate\", \"finishedDate\", \"url\", \"id\"}, {\"state\", \"result\", \"createdDate\", \"finishedDate\", \"url\", \"id\"}),\n    #\"Remove Empty Run IDs\" = Table.SelectRows(#\"Expanded value1\", each [id] <> null and [id] <> \"\"),\n    #\"Inserted Capitalize Each State\" = Table.AddColumn(#\"Remove Empty Run IDs\", \"State\", each Text.Proper([state]), type text),\n    #\"Inserted Capitalize Each Result\" = Table.AddColumn(#\"Inserted Capitalize Each State\", \"Result\", each Text.Proper([result]), type text),\n    #\"Removed Columns\" = Table.RemoveColumns(#\"Inserted Capitalize Each Result\", {\"state\", \"result\", \"url\"}),\n    #\"Standardize Column Names\" = Table.RenameColumns(#\"Removed Columns\",{{\"createdDate\", \"Created Date\"}, {\"finishedDate\", \"Finished Date\"}, {\"id\", \"Pipeline Run ID\"}}),\r\n  #\"Added Pipeline Run URL\" = Table.TransformColumnTypes(Table.AddColumn(#\"Standardize Column Names\", \"Pipeline Run URL\", each AzureDevOpsBaseURL & \"/_build/results?buildId=\" & Number.ToText([Pipeline Run ID]) & \"&view=results\"), {{\"Pipeline Run URL\", type text}}),\n    #\"Reordered Columns\" = Table.ReorderColumns(#\"Added Pipeline Run URL\",{\"Pipeline Run ID\", \"Pipeline ID\", \"Created Date\", \"Finished Date\", \"State\", \"Result\"}),\n    #\"Set DTZ columns\" = Table.TransformColumnTypes(#\"Reordered Columns\",{{\"Pipeline Run ID\", Int64.Type}, {\"Created Date\", type datetimezone}, {\"Finished Date\", type datetimezone}}),\n    #\"Calculate Difference In Finish and Start\" = Table.AddColumn(#\"Set DTZ columns\", \"Run Time in Seconds\", each try [Finished Date] - [Created Date] otherwise null),\n    #\"Calculated Total Seconds\" = Table.TransformColumns(#\"Calculate Difference In Finish and Start\",{{\"Run Time in Seconds\", Duration.TotalSeconds, type number}})\nin\n    #\"Calculated Total Seconds\";\r\n[Description = \"Latest Pipeline Runs per Pipeline found in the project parameter.\"]\r\nshared #\"Latest Pipeline Runs\" = let\n    Source = #\"Pipelines In Project - Intermediate\",\n    #\"Removed Other Columns\" = Table.SelectColumns(Source,{\"Pipeline ID\"}),\n    #\"Invoked Custom Function\" = Table.AddColumn(#\"Removed Other Columns\", \"GetPipelinesRunsInProject\", each fnGetPipelineRunsInProject([Pipeline ID])),\n    #\"Parsed JSON\" = Table.TransformColumns(#\"Invoked Custom Function\",{{\"GetPipelinesRunsInProject\", Json.Document}}),\n    #\"Expanded GetPipelinesRunsInProject\" = Table.ExpandRecordColumn(#\"Parsed JSON\", \"GetPipelinesRunsInProject\", {\"value\"}, {\"value\"}),\n    #\"Expanded value\" = Table.ExpandListColumn(#\"Expanded GetPipelinesRunsInProject\", \"value\"),\n    #\"Expanded value1\" = Table.ExpandRecordColumn(#\"Expanded value\", \"value\", {\"createdDate\", \"finishedDate\", \"id\"}, {\"createdDate\", \"finishedDate\", \"id\"}),\n    #\"Remove Empty Run IDs\" = Table.SelectRows(#\"Expanded value1\", each [id] <> null and [id] <> \"\"),\n    #\"Standardize Column Names\" = Table.RenameColumns(#\"Remove Empty Run IDs\",{{\"createdDate\", \"Created Date\"}, {\"finishedDate\", \"Finished Date\"}, {\"id\", \"Run ID\"}}),\n    #\"Set DTZ columns\" = Table.TransformColumnTypes(#\"Standardize Column Names\",{{\"Run ID\", Int64.Type}, {\"Created Date\", type datetimezone}, {\"Finished Date\", type datetimezone}}),\n    #\"Grouped Rows\" = Table.Group(#\"Set DTZ columns\", {\"Pipeline ID\"}, {{\"Latest Run Started\", each List.Max([Created Date]), type nullable datetimezone}})\nin\n    #\"Grouped Rows\";\r\n[Description = \"Scheduled Azure DevOps Pipelines run via a schedule in YAML.  We have seen where those schedules become disabled and the pipelines don't run.  This table sets expectations for how many hours can occur before an issue should be raised.\"]\r\nshared #\"Schedule Pipeline Expectations\" = let\n    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45WMlTSUTIyUYqNBQA=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#\"Pipeline ID\" = _t, #\"Hour Threshold\" = _t]),\n    #\"Convert Columns to Whole Numbers\" = Table.TransformColumnTypes(Source, {{\"Hour Threshold\", Int64.Type}, {\"Pipeline ID\", Int64.Type}})\nin\n    #\"Convert Columns to Whole Numbers\";\r\n[Description = \"Combined Pipelines in Project and Latest Pipeline Runs to build custom columns to help identify issues.\"]\r\nshared #\"Pipeline Runs In Project\" = let\n    Source = #\"Pipeline Runs\",\n    #\"Merged Queries\" = Table.NestedJoin(Source, {\"Pipeline ID\"}, #\"Latest Pipeline Runs\", {\"Pipeline ID\"}, \"Latest Pipeline Runs\", JoinKind.LeftOuter),\n    #\"Expanded Latest Pipeline Runs\" = Table.ExpandTableColumn(#\"Merged Queries\", \"Latest Pipeline Runs\", {\"Latest Run Started\"}, {\"Latest Run Started\"}),\n    #\"Calculated Is Latest\" = Table.AddColumn(#\"Expanded Latest Pipeline Runs\", \"Is Latest\", each [Created Date] = [Latest Run Started], type logical),\n    #\"Remove Uneccesary Columns\" = Table.RemoveColumns(#\"Calculated Is Latest\",{\"Latest Run Started\"}),\n    #\"Added custom\" = Table.AddColumn(#\"Remove Uneccesary Columns\", \"Pipeline All Runs URL\", each Text.BeforeDelimiter([Pipeline Run URL], \"/results\") & \"?definitionId=\" & Number.ToText([Pipeline ID]), type text)\nin\n    #\"Added custom\";\r\n[Description = \"Identify for pipelines where their latest run has not completed successfully.\"]\r\nshared #\"Issues - Latest Pipeline Run Failures\" = let\n    Source = #\"Pipeline Runs In Project\",\n    #\"Filtered Rows\" = Table.SelectRows(Source, each ([Is Latest] = true)),\n    #\"Add Is Issue\" = Table.AddColumn(#\"Filtered Rows\", \"Is Issue\", each if [Result] <> \"Succeeded\" and [State] = \"Completed\" then true else false,type logical),\n    #\"Filter for Issues\" = Table.SelectRows(#\"Add Is Issue\", each ([Is Issue] = true)),\n    #\"Added Issue ID\" = Table.AddColumn(#\"Filter for Issues\", \"Issue ID\", each PipelineIssueID),\n    #\"Change Issue ID to Int\" = Table.TransformColumnTypes(#\"Added Issue ID\",{{\"Issue ID\", Int64.Type}}),\n    #\"Add Unique ID\" = Table.AddColumn(#\"Change Issue ID to Int\", \"Unique ID\", each \"AZPipeline-\"&Number.ToText([Pipeline ID])&\"-\"&Number.ToText([Pipeline Run ID])),\n    #\"Change Unique ID to Text\" = Table.TransformColumnTypes(#\"Add Unique ID\",{{\"Unique ID\", type text}}),\n    #\"Merge with Pipelines to Get Name\" = Table.NestedJoin(#\"Change Unique ID to Text\", {\"Pipeline ID\"}, #\"Pipelines In Project\", {\"Pipeline ID\"}, \"Pipelines In Project\", JoinKind.LeftOuter),\n    #\"Expanded Pipeline In Project\" = Table.ExpandTableColumn(#\"Merge with Pipelines to Get Name\", \"Pipelines In Project\", {\"Pipeline Name\"}, {\"Artifact Name\"}),\n    #\"Standarize Names\" = Table.RenameColumns(#\"Expanded Pipeline In Project\",{{\"Finished Date\", \"Date Time of Issue\"}, {\"Pipeline Run URL\", \"Web URL\"}}),\n    #\"Removed Other Columns\" = Table.SelectColumns(#\"Standarize Names\",{\"Unique ID\", \"Artifact Name\", \"Date Time of Issue\", \"Web URL\", \"Issue ID\", \"Is Issue\"}),\n    #\"Standardize Order\" = Table.ReorderColumns(#\"Removed Other Columns\",{\"Unique ID\", \"Artifact Name\", \"Date Time of Issue\", \"Is Issue\", \"Issue ID\", \"Web URL\"})\nin\n    #\"Standardize Order\";\r\nshared #\"Issues - Schedule Pipelines That Failed to Run As Scheduled\" = let\n    Source = #\"Pipeline Runs In Project\",\n    #\"Filtered rows\" = Table.SelectRows(Source, each ([Is Latest] = true)),\n    #\"Merged queries\" = Table.NestedJoin(#\"Filtered rows\", {\"Pipeline ID\"}, #\"Schedule Pipeline Expectations\", {\"Pipeline ID\"}, \"Schedule Pipeline Expectations\", JoinKind.Inner),\n    #\"Expanded Schedule Pipeline Expectations\" = Table.ExpandTableColumn(#\"Merged queries\", \"Schedule Pipeline Expectations\", {\"Hour Threshold\"}, {\"Hour Threshold\"}),\n    #\"Calculate Hours Since Last Run\" = Table.AddColumn(#\"Expanded Schedule Pipeline Expectations\", \"Hours Since Last Run\", each Duration.TotalHours(Duration.From(DateTimeZone.UtcNow()-[Finished Date])), Int64.Type),\n    #\"Identify if Issue\" = Table.AddColumn(#\"Calculate Hours Since Last Run\", \"Is Issue\", each  [Hours Since Last Run] > [Hour Threshold], type logical),\n    #\"Filter for Issues\" = Table.SelectRows(#\"Identify if Issue\", each [Is Issue] = true),\n    #\"Added Issue ID\" = Table.AddColumn(#\"Filter for Issues\", \"Issue ID\", each FailedScheduledPipelineIssueID),\n    #\"Change Issue ID to Int\" = Table.TransformColumnTypes(#\"Added Issue ID\",{{\"Issue ID\", Int64.Type}}),\n    #\"Add Unique ID\" = Table.AddColumn(#\"Change Issue ID to Int\", \"Unique ID\", each \"AZPipeline-Sched-\"&Number.ToText([Pipeline ID])&\"-\"&Number.ToText([Pipeline Run ID])),\n    #\"Change Unique ID to Text\" = Table.TransformColumnTypes(#\"Add Unique ID\",{{\"Unique ID\", type text}}),\n    #\"Merge with Pipelines to Get Name\" = Table.NestedJoin(#\"Change Unique ID to Text\", {\"Pipeline ID\"}, #\"Pipelines In Project\", {\"Pipeline ID\"}, \"Pipelines In Project\", JoinKind.LeftOuter),\n    #\"Expanded Pipeline In Project\" = Table.ExpandTableColumn(#\"Merge with Pipelines to Get Name\", \"Pipelines In Project\", {\"Pipeline Name\"}, {\"Artifact Name\"}),\n    #\"Standarize Names\" = Table.RenameColumns(#\"Expanded Pipeline In Project\",{{\"Finished Date\", \"Date Time of Issue\"}, {\"Pipeline All Runs URL\", \"Web URL\"}}),\n    #\"Removed Other Columns\" = Table.SelectColumns(#\"Standarize Names\",{\"Unique ID\", \"Artifact Name\", \"Date Time of Issue\", \"Web URL\", \"Issue ID\", \"Is Issue\"}),\n    #\"Standardize Order\" = Table.ReorderColumns(#\"Removed Other Columns\",{\"Unique ID\", \"Artifact Name\", \"Date Time of Issue\", \"Is Issue\", \"Issue ID\", \"Web URL\"})\nin\n    #\"Standardize Order\";\r\n",
+        "connectionOverrides": [
+            {
+                "path": "|DEVOPS_URL|",
+                "kind": "Web",
+                "provider": "CdsA",
+                "authenticationKind": null,
+                "environmentName": null,
+                "apiName": null,
+                "connectionName": "{\"kind\":\"Web\",\"path\":\"|DEVOPS_URL|\"}",
+                "audience": null
+            }
+        ]
+    },
+    "annotations": [
+        {
+            "name": "pbi:QueryGroups",
+            "value": "[{\"id\":\"e8de208f-8845-4174-943c-370c447aada6\",\"name\":\"Parameters\",\"description\":\"\",\"parentId\":null,\"order\":0},{\"id\":\"6c766c58-9be2-463d-994d-fd33b346e1f0\",\"name\":\"Functions\",\"description\":\"\",\"parentId\":null,\"order\":0},{\"id\":\"fd9c64f9-aee1-49de-9d37-1003093ffab8\",\"name\":\"Bronze\",\"description\":\"Initial data pull from Azure DevOps.\",\"parentId\":null,\"order\":1},{\"id\":\"fe222f52-97ea-4290-8890-cc4ba99ad838\",\"name\":\"Silver\",\"description\":\"Augment Bronze layer to identify issues for monitoring Azure DevOps pipeline results.\",\"parentId\":null,\"order\":2}]"
+        }
+    ],
+    "entities": [
+        {
+            "$type": "LocalEntity",
+            "name": "Issues - Latest Pipeline Run Failures",
+            "description": "",
+            "pbi:refreshPolicy": {
+                "$type": "FullRefreshPolicy",
+                "location": "Issues%20-%20Latest%20Pipeline%20Run%20Failures.csv"
+            },
+            "attributes": [
+                {
+                    "name": "Unique ID",
+                    "dataType": "string"
+                },
+                {
+                    "name": "Artifact Name",
+                    "dataType": "string"
+                },
+                {
+                    "name": "Date Time of Issue",
+                    "dataType": "dateTimeOffset"
+                },
+                {
+                    "name": "Is Issue",
+                    "dataType": "boolean"
+                },
+                {
+                    "name": "Issue ID",
+                    "dataType": "int64"
+                },
+                {
+                    "name": "Web URL",
+                    "dataType": "string"
+                }
+            ],
+            "partitions": [
+                {
+                    "name": "FullRefreshPolicyPartition",
+                    "refreshTime": "2023-07-06T03:17:10.5407903+00:00",
+                    "location": "https://wabieus2bpcdsa.blob.core.windows.net:443/f9995fcc-f295-4243-9909-006279302333/Issues%20-%20Latest%20Pipeline%20Run%20Failures.csv?snapshot=2023-07-06T03%3A17%3A10.5082451Z"
+                }
+            ]
+        },
+        {
+            "$type": "LocalEntity",
+            "name": "Issues - Schedule Pipelines That Failed to Run As Scheduled",
+            "description": "",
+            "pbi:refreshPolicy": {
+                "$type": "FullRefreshPolicy",
+                "location": "Issues%20-%20Schedule%20Pipelines%20That%20Failed%20to%20Run%20As%20Scheduled.csv"
+            },
+            "attributes": [
+                {
+                    "name": "Unique ID",
+                    "dataType": "string"
+                },
+                {
+                    "name": "Artifact Name",
+                    "dataType": "string"
+                },
+                {
+                    "name": "Date Time of Issue",
+                    "dataType": "dateTimeOffset"
+                },
+                {
+                    "name": "Is Issue",
+                    "dataType": "boolean"
+                },
+                {
+                    "name": "Issue ID",
+                    "dataType": "int64"
+                },
+                {
+                    "name": "Web URL",
+                    "dataType": "string"
+                }
+            ],
+            "partitions": [
+                {
+                    "name": "FullRefreshPolicyPartition",
+                    "refreshTime": "2023-07-06T03:17:06.2751366+00:00",
+                    "location": "https://wabieus2bpcdsa.blob.core.windows.net:443/f9995fcc-f295-4243-9909-006279302333/Issues%20-%20Schedule%20Pipelines%20That%20Failed%20to%20Run%20As%20Scheduled.csv?snapshot=2023-07-06T03%3A17%3A06.2596373Z"
+                }
+            ]
+        }
+    ]
+}
