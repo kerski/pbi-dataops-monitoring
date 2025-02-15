@@ -10,7 +10,6 @@ Templates for monitoring Power BI components and related Power Platform elements
 1. [Exceptions with unscheduled Power BI Datasets](#Exceptions-with-unscheduled-Power-BI-Datasets)
 1. [Azure DevOps Pipeline Monitoring - Add On](./documentation/Azure-DevOps-Addon.md)
 
-
 ## Introduction
 
 Embracing the DataOps principle "Monitor Quality and Performance", this repository provides a set of templates and instructions for monitoring your Power BI solution/projects.  If you're an administrator of a workspace or multiple workspaces you should be monitoring your datasets and/or dataflows.  In addition, you may leverage Power Automate to schedule refreshes, deliver reports, move data between environments, or use the Power Automate visual in Power BI.  All these components are crucial to your solution working and relying on email alone can be problematic due to alert fatigure or incorrect settings for how email notifications are sent.
@@ -23,6 +22,7 @@ The Power BI templates in this repository help you monitor for issues such as:
 3. Long-running dataset refreshs - If a dataset is taking longer than two hours to run this is generally a concern and should be investigated.
 4. Unresolved Failed Dataflows Refreshes - If the latest dataflow has failed this template identifies the issue.
 5. Number of Data Quality Issue Tables within Dataset - If the dataset has hidden tables that start with "Errors in", this template identifies the issue.  This indicates existing or prior cell-level errors that need to be resolved (and tables deleted).
+    - *Note*: This check does not work as of January 2025.  Microsoft locked down the ability for the ExecuteQueries endpoint to access Dynamic Management Views and INFO functions.  INFO functions should be restored at some point, but there is no publicly available timeframe.
 
 ### Power Automate Issues
 1. Unresolved Failure with Scheduled Power Automate Flows - If the latest schedule flow in Power Automate fails this template identifies the issue.
